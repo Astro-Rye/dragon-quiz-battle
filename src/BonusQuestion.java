@@ -1,11 +1,12 @@
-// Child #2 of AbstractQuestion
-public class BonusQuestion {
-    public BonusQuestion(String text, String [] options, int corrrectIndex) {
+// Child #1 of AbstractQuestion
+public class BonusQuestion extends AbstractQuestion {
+    public BonusQuestion(String text, String[] options, int correctIndex) {
         super(text, options, correctIndex);
     }
-   // REQUIREMENT; Overridden method (different
+
+    // REQUIREMENT: Overriden method ( different scoring )
     @Override
     public int getScoreDelta(boolean correct) {
-        return correct ? 60 :-10;
+        return correct ? 60 : -10;
     }
 }

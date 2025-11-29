@@ -1,5 +1,5 @@
 // child #1 of AbstractQuestion
-public class StandardQuestion {
+public class StandardQuestion extends AbstractQuestion {
 
     private int difficulty; // 1 = easy, 2 = normal, 3 = hard
 
