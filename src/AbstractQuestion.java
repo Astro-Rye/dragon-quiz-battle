@@ -32,4 +32,9 @@ public class AbstractQuestion implements Scorable {
         }
         return choseIndex == correctIndex;
     }
+
+    @Override
+    public int getScoreDelta(boolean correct) {
+        return 0;
+    }
 }

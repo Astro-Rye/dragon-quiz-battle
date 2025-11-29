@@ -1,4 +1,4 @@
 // REQUIREMENT: Interface implemented by 2+ classes
-public class Scorable {
+public interface Scorable {
     int getScoreDelta(boolean correct);
 }

@@ -1,6 +1,6 @@
 
 // REQUIREMENT: Custom exception
-public class InvalidAnswerException extends Throwable {
+public class InvalidAnswerException extends Exception {
     public InvalidAnswerException(String message) {
         super(message);
     }

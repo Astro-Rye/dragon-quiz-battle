@@ -3,8 +3,9 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
+//
 
-public class SaiyanQuizGame {
+public class SaiyanQuizGame extends JFrame{
     // REQUIREMENT: LayoutManager with JFramee ( BorderLayout, plus inner layouts)
 
     // Model
@@ -41,13 +42,13 @@ public class SaiyanQuizGame {
         super("Saiyan Quiz Battle");
         // Load images ( put files in / resources or project root)
         // Requirement: Image usage
-        corectIcon = new ImageIcon("resoources/correct.png"); // update paths for your project
+        corectIcon = new ImageIcon("resources/correct.png"); // update paths for your project
         wrongIcon = new ImageIcon("resources/wrong.png");
 
         buildUI();
         wireEvents();
 
-        loadFirstQuestiono();
+        loadFirstQuestion();
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
@@ -59,7 +60,7 @@ public class SaiyanQuizGame {
         root.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // ==== NORTHL Title + player ====
-        title.Label.setFont(new Font("SansSerif", Font.BOLD, 20));
+        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
         root.add(titleLabel, BorderLayout.NORTH);
 
         JPanel playerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -100,7 +101,8 @@ public class SaiyanQuizGame {
         // RIGHT side: feedback image + log
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BorderLayout(5,5));
-        rightPanel.setBorder(BorderFactory.createTitleBorder("Battle Feedback"));
+        rightPanel.setBorder(
+                BorderFactory.createTitledBorder("Battle Feedback"));
          imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
          rightPanel.add(imageLabel, BorderLayout.CENTER);
 
@@ -120,5 +122,110 @@ public class SaiyanQuizGame {
 
     }
 
+private void loadFirstQuestion() {
+        currentQuestion = questionBank.getCurrentQuestion();
+        showQuestion();
+}
+private void showQuestion() {
+        if(currentQuestion == null){
+            endGame();
+            return;
+        }
 
+int index = questionBank.getCurrentIndex();
+questionNumberLabel.setText("Question " + (index + 1) + " / " + questionBank.getTotalQuestions());
+questionTextLabel.setText(currentQuestion.getText());
+
+String [] opts = currentQuestion.getOptions();
+for(int i = 0; i < optionButtons.length; i++) {
+    optionButtons[i].setText(opts[i]);
+}
+
+optionsGroup.clearSelection();
+imageLabel.setIcon(null);
+log("New question loaded.");
+nextButton.setEnabled(false);
+submitButton.setEnabled(true);
+}
+
+private int getSelectedOptionIndex() {
+        for(int i = 0; i < optionButtons.length; i++) {
+            if(optionButtons[i].isSelected()) return i;
+        }
+        return -1;
+}
+
+private void onSubmit(ActionEvent e ) {
+        if(nameField.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Please enter your name first.");
+            return;
+        }
+        playerName = nameField.getText().trim();
+
+        int chosen = getSelectedOptionIndex();
+        try {
+            boolean correct = currentQuestion.checkAnswer(chosen); // may throw InvalidAnswerException
+
+            int delta = currentQuestion.getScoreDelta(correct);
+            score+= delta;
+            powerLabel.setText("Power: " + score);
+             if(correct) {
+                 imageLabel.setIcon(corectIcon);
+                 log(playerName + " answered correctly! Power +" + delta);
+             } else {
+                 imageLabel.setIcon(wrongIcon);
+                 log(playerName + "missed the question. Power " + delta);
+             }
+
+             submitButton.setEnabled(false);
+             nextButton.setEnabled(true);
+        } catch (InvalidAnswerException ex) {
+            // REQUIREMENT: custom exception is caught and handled
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Invalid Answer", JOptionPane.WARNING_MESSAGE);
+
+        }
+}
+
+private void onNext(ActionEvent e) {
+        currentQuestion = questionBank.nextQuestion();
+        if(currentQuestion == null) {
+            endGame();
+        } else {
+            showQuestion();
+        }
+}
+
+private void onViewHighScores(ActionEvent e) {
+        List<String> scores = HighScoreManager.loadScores();
+        if(scores.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No high scores yet.");
+            return;
+        }
+        StringBuilder sb = new StringBuilder("Highscores:\n");
+        for(String s : scores) {
+            sb.append(". ").append(s).append("\n");
+        }
+        JOptionPane.showMessageDialog(this, sb.toString());
+}
+
+private void endGame() {
+        log("Game over! Final power level " + score);
+        HighScoreManager.saveScore(playerName, score);
+
+        JOptionPane.showMessageDialog(this,
+                "Game over, " + playerName + "!\nYour Final power level: " + score +
+                                    "\nScore saved to highscores.txt");
+
+        submitButton.setEnabled(false);
+        nextButton.setEnabled(false);
+}
+
+private void log(String text) {
+        logArea.append(text + "\n");
+        logArea.setCaretPosition(logArea.getDocument().getLength());
+}
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new SaiyanQuizGame().setVisible(true));
+    }
 }

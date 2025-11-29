@@ -3,7 +3,7 @@ import java.util.LinkedList;
 public class QuizQuestionBank {
 
     // REQUIREMENT: Uses LinkedList as data structure
-    public class QuizQuestionBank {
+
         private final LinkedList<AbstractQuestion> questions = new LinkedList<>();
         private int index = 0;
 
@@ -53,5 +53,4 @@ public class QuizQuestionBank {
         public void reset() {
             index = 0;
         }
-    }
 }
