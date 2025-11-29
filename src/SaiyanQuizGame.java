@@ -113,5 +113,12 @@ public class SaiyanQuizGame {
         nextButton.setEnabled(false);
     }
 
-    /
+    private void wireEvents() {
+        submitButton.addActionListener(this::onSubmit);
+        nextButton.addActionListener(this::onNext);
+        highScoreButton.addActionListener(this::onViewHighScores);
+
+    }
+
+
 }
