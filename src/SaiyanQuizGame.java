@@ -43,7 +43,7 @@ public class SaiyanQuizGame extends JFrame{
         super("Saiyan Quiz Battle");
         // Load images
         // Requirement: Image usage
-        startIcon = new ImageIcon("src/resources/start.jpg");
+        startIcon = new ImageIcon("/Users/josephcarrillo/IdeaProjects/dragon-quiz-battle/src/resources/start.jpg");
         corectIcon = new ImageIcon("src/resources/correct.jpg");
         wrongIcon = new ImageIcon("src/resources/wrong.jpg");
 
