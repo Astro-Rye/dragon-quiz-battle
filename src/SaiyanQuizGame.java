@@ -146,7 +146,9 @@ for(int i = 0; i < optionButtons.length; i++) {
 }
 
 optionsGroup.clearSelection();
-imageLabel.setIcon(null);
+if(imageLabel.getIcon() == null) {
+    imageLabel.setIcon(startIcon);
+}
 log("New question loaded.");
 nextButton.setEnabled(false);
 submitButton.setEnabled(true);
