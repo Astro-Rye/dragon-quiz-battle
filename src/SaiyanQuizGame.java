@@ -220,7 +220,7 @@ private void endGame() {
                 "Play again?",
                 JOptionPane.YES_NO_OPTION);
 
-        if(playAgain == JOptionPane.YES_NO_OPTION) {
+        if(playAgain == JOptionPane.YES_OPTION) {
             // reset game state
             score = 0;
             powerLabel.setText("Power: 0");
