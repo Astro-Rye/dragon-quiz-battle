@@ -10,6 +10,7 @@ Saiyan Quiz Battle is a Dragon Ball themed trivia game that challenges the playe
 Each correct answer increases your "power level" and displays a feedback image showing whether you were right or wrong.
 Ypur total score is saved to a high score file and the end of each game and is visible for players to see
 ![Screenshot 2025-11-29 at 11.43.36 PM.png](src/resources/Screenshot%202025-11-29%20at%2011.43.36%E2%80%AFPM.png)
+![Screenshot 2025-11-30 at 12.41.59 AM.png](src/resources/Screenshot%202025-11-30%20at%2012.41.59%E2%80%AFAM.png)
 ![Screenshot 2025-11-29 at 11.44.20 PM.png](src/resources/Screenshot%202025-11-29%20at%2011.44.20%E2%80%AFPM.png)
 ![Screenshot 2025-11-29 at 11.44.56 PM.png](src/resources/Screenshot%202025-11-29%20at%2011.44.56%E2%80%AFPM.png)
 ![Screenshot 2025-11-29 at 11.45.46 PM.png](src/resources/Screenshot%202025-11-29%20at%2011.45.46%E2%80%AFPM.png)
