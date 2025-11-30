@@ -37,17 +37,19 @@ public class SaiyanQuizGame extends JFrame{
     private final JLabel imageLabel = new JLabel(); // will show correct/wrong image
     private final ImageIcon corectIcon;
     private final ImageIcon wrongIcon;
+    private final ImageIcon startIcon;
 
     public SaiyanQuizGame() {
         super("Saiyan Quiz Battle");
-        // Load images ( put files in / resources or project root)
+        // Load images
         // Requirement: Image usage
-        corectIcon = new ImageIcon("src/resources/correct.jpg"); // update paths for your project
+        startIcon = new ImageIcon("src/resources/start.jpg");
+        corectIcon = new ImageIcon("src/resources/correct.jpg");
         wrongIcon = new ImageIcon("src/resources/wrong.jpg");
+
 
         buildUI();
         wireEvents();
-
         loadFirstQuestion();
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -98,6 +100,7 @@ public class SaiyanQuizGame extends JFrame{
         rightPanel.setBorder(
                 BorderFactory.createTitledBorder("Battle Feedback"));
          imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+         imageLabel.setIcon(startIcon);
          rightPanel.add(imageLabel, BorderLayout.CENTER);
             logScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
             rightPanel.add(logScroll, BorderLayout.SOUTH);
