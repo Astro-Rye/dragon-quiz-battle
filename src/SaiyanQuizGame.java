@@ -110,6 +110,8 @@ public class SaiyanQuizGame extends JFrame{
         playerPanel.add(powerLabel);
         root.add(playerPanel, BorderLayout.SOUTH);
 
+        //
+        setContentPane(root);
          // Initial states
         nextButton.setEnabled(false);
     }
@@ -222,13 +224,14 @@ private void endGame() {
             // reset game state
             score = 0;
             powerLabel.setText("Power: 0");
+            logArea.setText("");
+            questionBank.reset();
+            currentQuestion = questionBank.getCurrentQuestion();
+            showQuestion();
+        } else {
+            submitButton.setEnabled(false);
+            nextButton.setEnabled(false);
         }
-        JOptionPane.showMessageDialog(this,
-                "Game over, " + playerName + "!\nYour Final power level: " + score +
-                                    "\nScore saved to highscores.txt");
-
-        submitButton.setEnabled(false);
-        nextButton.setEnabled(false);
 }
 
 private void log(String text) {
