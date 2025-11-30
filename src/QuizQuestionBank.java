@@ -29,7 +29,18 @@ public class QuizQuestionBank {
                     2));
 
             // Add more questions if wanted
-
+            questions.add(new BonusQuestion(
+                    "Which Saiyan loves fighting more than anything' ? ",
+                    new String[] {"Goku", "Gohank", "Yamcha", "Tien"},
+                    2));
+            questions.add(new StandardQuestion(
+                    "Which character is known for training in 100x gravity' ? ",
+                    new String[] {"Vegeta", "Trunks", "Krillin", "Bulma"},
+                    3));
+            questions.add(new BonusQuestion(
+                    "Who defeated majin buu during the cell games' ? ",
+                    new String[] {"Goku", "Gohan", "Vegeto", "Gotanks"},
+                    4));
         }
         public AbstractQuestion getCurrentQuestion() {
             if(questions.isEmpty() || index >= questions.size()) return null;

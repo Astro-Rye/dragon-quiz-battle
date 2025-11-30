@@ -4,9 +4,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
 //
-
+// REQUIREMENT: LayoutManager with JFramee ( BorderLayout, plus inner layouts)
 public class SaiyanQuizGame extends JFrame{
-    // REQUIREMENT: LayoutManager with JFramee ( BorderLayout, plus inner layouts)
+
 
     // Model
     private final QuizQuestionBank questionBank = new QuizQuestionBank();
@@ -63,12 +63,6 @@ public class SaiyanQuizGame extends JFrame{
         titleLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
         root.add(titleLabel, BorderLayout.NORTH);
 
-        JPanel playerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        playerPanel.add(new JLabel ("Name: "));
-        playerPanel.add(nameField);
-        playerPanel.add(powerLabel);
-        root.add(playerPanel, BorderLayout.SOUTH); // WE'LL move log later; for now this is simple
-
         // ===== CENTER: main content split into left question + right image ===
         JPanel center = new JPanel(new GridLayout(1,2,8,8));
 
@@ -105,11 +99,16 @@ public class SaiyanQuizGame extends JFrame{
                 BorderFactory.createTitledBorder("Battle Feedback"));
          imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
          rightPanel.add(imageLabel, BorderLayout.CENTER);
-
+            logScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+            rightPanel.add(logScroll, BorderLayout.SOUTH);
          center.add(rightPanel);
          root.add(center, BorderLayout.CENTER);
-
-         setContentPane(root);
+         // == SOUTH: player info ===
+        JPanel playerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        playerPanel.add(new JLabel ("Name: "));
+        playerPanel.add(nameField);
+        playerPanel.add(powerLabel);
+        root.add(playerPanel, BorderLayout.SOUTH);
 
          // Initial states
         nextButton.setEnabled(false);
@@ -212,6 +211,18 @@ private void endGame() {
         log("Game over! Final power level " + score);
         HighScoreManager.saveScore(playerName, score);
 
+        int playAgain = JOptionPane.showConfirmDialog(
+                this,
+                "Game over, " + playerName + "!\nFinal power level: " + score +
+                        "\nPlay again?",
+                "Play again?",
+                JOptionPane.YES_NO_OPTION);
+
+        if(playAgain == JOptionPane.YES_NO_OPTION) {
+            // reset game state
+            score = 0;
+            powerLabel.setText("Power: 0");
+        }
         JOptionPane.showMessageDialog(this,
                 "Game over, " + playerName + "!\nYour Final power level: " + score +
                                     "\nScore saved to highscores.txt");

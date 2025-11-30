@@ -8,9 +8,9 @@ public class HighScoreManager {
 
     public static void saveScore(String playerName, int score) {
         try(PrintWriter out = new PrintWriter(new FileWriter(FILE_NAME, true))) {
-            out.println(playerName + " , " + score );
+            out.println(playerName + " - " + score );
         } catch (IOException e ) {
-            System.out.println("Could not save high score: " + e.getMessage());
+            System.err.println("Could not save high score: " + e.getMessage());
         }
     }
     public static List<String> loadScores() {
