@@ -42,8 +42,8 @@ public class SaiyanQuizGame extends JFrame{
         super("Saiyan Quiz Battle");
         // Load images ( put files in / resources or project root)
         // Requirement: Image usage
-        corectIcon = new ImageIcon("resources/correct.png"); // update paths for your project
-        wrongIcon = new ImageIcon("resources/wrong.png");
+        corectIcon = new ImageIcon("src/resources/correct.jpg"); // update paths for your project
+        wrongIcon = new ImageIcon("src/resources/wrong.jpg");
 
         buildUI();
         wireEvents();
